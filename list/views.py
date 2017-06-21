@@ -13,12 +13,14 @@ from rest_framework import viewsets
 from .serializers import UserSerializer, GroupSerializer, TodoListSerializer
 from rest_framework.permissions import IsAuthenticated
 
+
 class TodoListView(ListView):
     model = TodoList
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(TodoListView, self).dispatch(request, *args, **kwargs)
+
 
 class TodoListCreate(CreateView):
     model = TodoList
@@ -28,6 +30,7 @@ class TodoListCreate(CreateView):
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(TodoListCreate, self).dispatch(request, *args, **kwargs)
+
 
 class TodoListDelete(DeleteView):
     model = TodoList
@@ -39,6 +42,7 @@ class TodoListDelete(DeleteView):
     def dispatch(self, request, *args, **kwargs):
         return super(TodoListDelete, self).dispatch(request, *args, **kwargs)
 
+
 def TodoListUpdate(UpdateView):
     model = TodoList
     fields = ['name']
@@ -47,6 +51,7 @@ def TodoListUpdate(UpdateView):
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(TodoListUpdate, self).dispatch(request, *args, **kwargs)
+
 
 @login_required
 @require_http_methods(["POST"])
@@ -66,14 +71,14 @@ def create_user(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.is_staff=True
-            form.is_superuser=True
             form.save()
             return HttpResponseRedirect('/list')
     return render(request, 'list/create_user.html', {'form': form})
 
 # Rest API
 #
+
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
@@ -82,6 +87,7 @@ class UserViewSet(viewsets.ModelViewSet):
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
 
 class TodoListViewSet(viewsets.ModelViewSet):
     queryset = TodoList.objects.all()
