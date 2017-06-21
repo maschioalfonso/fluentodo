@@ -62,14 +62,13 @@ def toogle_todo(request, pk):
 # a Oauth, like auth0 Authtenticator.
 @require_http_methods(["GET", "POST"])
 def create_user(request):
+    form = UserCreationForm()
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/')
-    else:
-        form = UserCreationForm()
-        return render(request, 'list/create_user.html', {'form': form})
+            return HttpResponseRedirect('/list')
+    return render(request, 'list/create_user.html', {'form': form})
 
 # Rest API
 #
