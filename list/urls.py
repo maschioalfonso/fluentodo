@@ -8,7 +8,7 @@ from .serializers import UserSerializer, GroupSerializer, TodoListSerializer
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'groups', GroupViewSet)
-router.register(r'todolist', TodoListViewSet)
+router.register(r'todolist-api', TodoListViewSet)
 
 
 urlpatterns = [
