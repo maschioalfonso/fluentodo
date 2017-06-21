@@ -1,0 +1,8 @@
+{% extends "admin/login.html" %}
+
+{% block content %}
+    {{ block.super }}
+    <div class="register-row">
+        <label>&nbsp;</label><a href="{% url 'create_user' %}">Not member Yet? Register with this ugly form while we migrate to OAuth</a>
+    </div>
+{% endblock %}

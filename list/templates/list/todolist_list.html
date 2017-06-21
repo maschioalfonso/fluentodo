@@ -1,0 +1,36 @@
+{% extends "admin/base.html" %}
+{% block content %}
+<h2>List</h2>
+<table style="width:100%">
+  <tr>
+    <th>Name</th>
+    <th>Is Complete</th>
+    <th>Delete</th>
+  </tr>
+{% for item in object_list %}
+    <tr>
+        <td>{{ item.name }} </td>
+        <td> {% if item.completed %}
+                <img src="/static/admin/img/icon-yes.svg" alt="True">
+            {% else %}
+                <img src="/static/admin/img/icon-no.svg" alt="False">
+            {% endif %}
+        </td>
+        <td>
+        <form action="/list/delete_todo/{{item.id}}/" method="POST">{% csrf_token %}
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+        <td>
+            <form action="/list/toogle_todo/{{item.id}}/" method="POST">{% csrf_token %}
+                <input type="submit" value={{item.completed|yesno:"Uncomplete,Complete" }} />
+            </form>
+        </td>
+    </tr>
+{% endfor %}
+</table>
+
+<form action="/list/create_todo/" method="get">
+    <input type="submit" value="New"/>
+</form>
+{% endblock %}

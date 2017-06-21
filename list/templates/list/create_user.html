@@ -1,0 +1,9 @@
+{% extends "admin/base.html" %}
+{% block content %}
+{{ block.super }}
+<form action='/list/create_user/' method='post'>
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
+{% endblock %}
