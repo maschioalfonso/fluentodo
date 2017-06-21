@@ -44,13 +44,13 @@ No test were included  ¯\\_(ツ)_/¯
  
 ## WIP
  
-Since the 4 hours mark. I left some criticals this todo, here is the list:
+Since the 4 hours mark. I left some criticals things todo, here is the list:
  
 * Implement an Oauth2 authorization and authentication method.
 * Make integrations test
 * Make unit test
 * The message “ToDo item {Name} has been deleted correctly” is not implemented, but the parameter is set in the query string. `?just_delete_name=<name>` ¯\\_(ツ)_/¯
- 
+* Rename the app `list`.
  
 ## License
  
