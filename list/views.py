@@ -11,7 +11,7 @@ from .models import TodoList
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from .serializers import UserSerializer, GroupSerializer, TodoListSerializer
-
+from rest_framework.permissions import IsAuthenticated
 
 class TodoListView(ListView):
     model = TodoList
@@ -66,6 +66,8 @@ def create_user(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
+            form.is_staff=True
+            form.is_superuser=True
             form.save()
             return HttpResponseRedirect('/list')
     return render(request, 'list/create_user.html', {'form': form})
@@ -84,3 +86,4 @@ class GroupViewSet(viewsets.ModelViewSet):
 class TodoListViewSet(viewsets.ModelViewSet):
     queryset = TodoList.objects.all()
     serializer_class = TodoListSerializer
+    permission_classes = [IsAuthenticated]
